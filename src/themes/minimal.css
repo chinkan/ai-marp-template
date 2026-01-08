@@ -1,0 +1,60 @@
+/* @theme minimal */
+
+@import 'default';
+
+section {
+  background-color: #ffffff;
+  color: #333333;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  padding: 50px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #000000;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 2.5em;
+  border: none;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 1.8em;
+  color: #444;
+}
+
+p, li {
+  line-height: 1.6;
+}
+
+blockquote {
+  border-left: 4px solid #eee;
+  color: #666;
+  padding-left: 20px;
+  font-style: italic;
+}
+
+code {
+  background-color: #f5f5f5;
+  color: #d63384;
+}
+
+/* Minimalist footer */
+footer {
+  color: #999;
+  font-size: 0.8em;
+}
+
+/* Inverted slide for emphasis */
+section.invert {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+section.invert h1, section.invert h2 {
+  color: #ffffff;
+}

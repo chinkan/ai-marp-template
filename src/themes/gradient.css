@@ -1,0 +1,26 @@
+/* @theme gradient */
+
+@import 'default';
+
+section {
+  background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+  color: #333;
+}
+
+h1 {
+  background: -webkit-linear-gradient(#ff6b6b, #556270);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2.5em;
+}
+
+section.invert {
+  background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  color: white;
+}
+
+section.invert h1 {
+  background: none;
+  -webkit-text-fill-color: white;
+  color: white;
+}

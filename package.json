@@ -1,17 +1,34 @@
 {
   "name": "my-marp-template",
   "version": "1.0.0",
-  "description": "",
+  "description": "AI-powered Marp presentation template with custom themes and Cursor integration",
   "scripts": {
-    "dev": "marp --watch --server --allow-local-files src/",
-    "build": "marp src/slide.md --allow-local-files -o dist/slide.html",
+    "dev": "marp --watch --server --allow-local-files --theme-set src/themes -I src",
+    "build": "marp --allow-local-files --theme-set src/themes -I src -o dist",
+    "build:slides": "marp --allow-local-files --theme-set src/themes -I src/slides -o dist/slides",
     "serve": "marp --server dist/",
-    "pptx": "marp src/slide.md --allow-local-files --pptx -o output/slide.pptx",
-    "pdf": "marp src/slide.md --allow-local-files --pdf -o output/slide.pdf"
+    "pptx": "marp --allow-local-files --theme-set src/themes --pptx -I src/slides -o output",
+    "pdf": "marp --allow-local-files --theme-set src/themes --pdf -I src/slides -o output"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/my-marp-template.git"
+  },
+  "keywords": [
+    "marp",
+    "presentation",
+    "slides",
+    "markdown",
+    "cursor-ai",
+    "template",
+    "css-themes"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/my-marp-template/issues"
+  },
+  "homepage": "https://github.com/yourusername/my-marp-template#readme",
   "packageManager": "pnpm@10.27.0",
   "devDependencies": {
     "@marp-team/marp-cli": "^4.2.3"

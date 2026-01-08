@@ -1,13 +1,15 @@
 ---
 description: Rules for generating Marp presentation slides
-globs: src/slide.md
+globs: src/**/*.md
 ---
 
 # Marp Presentation Rules
 
 ## Context
 This project uses Marp (Markdown Presentation Ecosystem) to generate slides from Markdown.
-- **Main File**: `src/slide.md`
+- **Slides Directory**: `src/slides/` (user-created presentations)
+- **Demo Directory**: `src/demo/` (theme showcases and examples)
+- **Themes**: `src/themes/` (custom CSS themes)
 - **Assets**: `src/assets/` (images, icons, videos)
 - **Engine**: `@marp-team/marp-cli`
 
@@ -18,25 +20,32 @@ Before generating or modifying slides, you **MUST**:
 2.  **Search for Best Practices (Web)**: Use `web_search` to research current presentation design trends and best practices (e.g., "effective slide layouts 2024").
 3.  **Verify syntax**: Ensure any directives (e.g., `<!-- _class: invert -->`) or image attributes (e.g., `![bg right:40%]`) are currently supported.
 
-## 2. "@slide" Trigger & Workflow
+## 2. Trigger Commands
 
-When the user inputs `@slide` followed by ideas/points:
+### `@slide` - Create NEW Presentation
+
+When user inputs `@slide` followed by ideas/points, **ALWAYS create a NEW slide file**:
 
 1.  **Parse & Plan**:
     *   Extract the core topic and key points.
+    *   Generate a filename from the topic (kebab-case, e.g., `project-alpha-launch.md`)
+    *   **Theme Selection**: Suggest or select a theme based on content tone:
+        *   Business/Formal -> `corporate`
+        *   Code/Tech -> `developer`
+        *   Creative/Marketing -> `gradient`
+        *   Clean/Academic -> `minimal`
+        *   Elegant/Evening -> `midnight`
     *   Structure the presentation:
         *   **Title Slide**: Title, Subtitle, Presenter Name.
         *   **Agenda/Overview**: Brief list of what will be covered.
         *   **Content Slides**: Break down points (1 idea per slide).
         *   **Conclusion**: Summary and Q&A.
 2.  **Generate Content**:
-    *   Write the Markdown in `src/slide.md`.
+    *   Create new file in `src/slides/<topic-name>.md`
     *   Apply **Presentation Best Practices** (see below).
     *   Use appropriate Marp syntax for layout and styling.
 
-### Example Usage
-
-**User Input:**
+**Example:**
 ```text
 @slide
 Topic: Project Alpha Launch
@@ -46,8 +55,43 @@ Points:
 - Next steps: Mobile app
 ```
 
-**AI Action:**
-Generates `src/slide.md` with a title slide, and individual slides for deployment, adoption, and next steps, using professional layouts.
+**AI Action:** Creates `src/slides/project-alpha-launch.md` with full presentation.
+
+### `@slide-update` - Update EXISTING Presentation
+
+When user inputs `@slide-update` followed by ideas/changes:
+
+1.  **Identify Target**: Look for the currently open slide file or ask user which file to update.
+2.  **Modify Content**:
+    *   Read the existing slide file.
+    *   Apply user's requested changes (add slides, modify content, reorder, etc.).
+    *   Preserve existing structure unless explicitly asked to change.
+3.  **Save Changes**: Update the existing file in place.
+
+### `@theme` - List & Preview Themes
+
+When user inputs `@theme` or asks about themes:
+
+1.  **List Available Themes**:
+    *   `corporate` (Blue/Professional)
+    *   `developer` (Dark/Code-focused)
+    *   `gradient` (Vibrant/Creative)
+    *   `minimal` (White/Clean)
+    *   `midnight` (Navy/Gold/Elegant)
+2.  **Suggest Actions**:
+    *   "Would you like to see a demo of the midnight theme?" -> Open `src/demo/theme-midnight.md`
+    *   "Set theme to minimal" -> Update `theme: minimal` in front-matter.
+
+### `@slide-export` - Export Presentation
+
+When user inputs `@slide-export`:
+
+1.  **Identify Format**: Ask if not specified (PDF, PPTX, or HTML).
+2.  **Execute Command**:
+    *   PDF: `pnpm pdf` (Exports all to output/)
+    *   PPTX: `pnpm pptx` (Exports all to output/)
+    *   HTML: `pnpm build` (Builds to dist/)
+3.  **Verify**: Check if `output/` directory exists and inform user of location.
 
 ## 3. Presentation Best Practices
 
@@ -55,7 +99,9 @@ Apply these principles to all generated slides:
 
 *   **One Idea Per Slide**: Don't cram multiple complex topics onto one slide.
 *   **6x6 Rule**: Max 6 bullet points per slide, max 6 words per bullet.
-*   **Visuals Over Text**: Use images/diagrams to explain concepts (use placeholders if no assets exist: `![placeholder](https://via.placeholder.com/800x600)`).
+*   **Visuals Over Text**:
+    *   Use images/diagrams to explain concepts.
+    *   **Placeholders**: If no specific image exists, use `![bg right:40%](https://placehold.co/600x400/png?text=Topic)` or similar.
 *   **Consistent Formatting**:
     *   Use the same theme throughout.
     *   Keep headers hierarchical (`#` for slide titles, `##` for content headers).
@@ -66,11 +112,11 @@ Apply these principles to all generated slides:
 ## 4. Marp Syntax Reference
 
 ### Front-matter (Required)
-Always start `src/slide.md` with:
+Always start slides with:
 ```yaml
 ---
 marp: true
-theme: default # or gaia, uncover
+theme: default # or gaia, uncover, corporate, developer, gradient, minimal, midnight
 paginate: true
 header: 'Project Name'
 footer: '© 2024 Company'
@@ -80,40 +126,16 @@ footer: '© 2024 Company'
 ### Slide Separation
 Use `---` surrounded by blank lines to separate slides.
 
-```markdown
-# Slide 1
-
----
-
-# Slide 2
-```
-
 ### Directives
 *   **Global** (in front-matter): `theme`, `size` (16:9 or 4:3)
-*   **Local** (per slide, use underscore):
-    ```markdown
-    <!-- _class: invert -->
-    <!-- _paginate: false -->
-    <!-- _header: '' -->
-    ```
-*   **Scoped** (applies to current slide and following):
-    ```markdown
-    <!-- class: lead -->
-    ```
+*   **Local** (per slide, use underscore): `<!-- _class: invert -->`
+*   **Scoped** (applies to current slide and following): `<!-- class: lead -->`
 
 ### Images
 *   **Standard**: `![width:500px](image.png)`
 *   **Background**: `![bg](image.jpg)`
 *   **Split Background**: `![bg right:40%](image.jpg)` (Places image on right 40%, text on left)
 *   **Filters**: `![bg brightness:0.8](image.jpg)`
-
-### Code Blocks
-Always specify the language:
-```markdown
-```javascript
-console.log('Hello');
-```
-```
 
 ### Speaker Notes
 Use HTML comments:
@@ -124,7 +146,17 @@ Remember to pause here and ask for questions.
 -->
 ```
 
-## 5. Asset Usage
-*   Store images in `src/assets/images/`.
-*   Reference them relative to the markdown file: `![icon](./assets/icons/icon.png)`.
-*   Prefer local assets over remote URLs for production slides.
+## 5. Directory Structure
+
+```
+src/
+├── slides/           # User presentations (created via @slide)
+├── demo/             # Theme demos
+│   ├── theme-corporate.md
+│   ├── theme-developer.md
+│   ├── theme-gradient.md
+│   ├── theme-minimal.md
+│   └── theme-midnight.md
+├── themes/           # Custom CSS themes
+└── assets/           # Media files
+```

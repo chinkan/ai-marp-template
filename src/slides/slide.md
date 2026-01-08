@@ -53,7 +53,7 @@ Use `_class: invert` for dark backgrounds
 ## Local Assets Example
 
 <!-- Use relative paths for local images -->
-![width:200px](./assets/images/sample.png)
+![width:200px](../assets/images/sample.png)
 
 Place your images in `src/assets/images/`
 
