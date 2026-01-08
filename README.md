@@ -103,6 +103,16 @@ Contributions are welcome! Please look at the [issues](https://github.com/chinka
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+## 🙏 Acknowledgments
+
+This project is built on top of the amazing **Marp** ecosystem. Huge thanks to the Marp team for creating such a powerful tool!
+
+- [Marp](https://marp.app/) - Official Website
+- [marp-team/marp](https://github.com/marp-team/marp) - The entrance repository of Marp
+- [marp-team/marp-cli](https://github.com/marp-team/marp-cli) - CLI tool used in this template
+- [marp-team/marp-core](https://github.com/marp-team/marp-core) - The core engine
+- [marp-team/marpit](https://github.com/marp-team/marpit) - Marpit framework
+
 ## 📄 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
