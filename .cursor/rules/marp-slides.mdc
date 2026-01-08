@@ -1,0 +1,130 @@
+---
+description: Rules for generating Marp presentation slides
+globs: src/slide.md
+---
+
+# Marp Presentation Rules
+
+## Context
+This project uses Marp (Markdown Presentation Ecosystem) to generate slides from Markdown.
+- **Main File**: `src/slide.md`
+- **Assets**: `src/assets/` (images, icons, videos)
+- **Engine**: `@marp-team/marp-cli`
+
+## 1. Pre-Generation Research Requirement (CRITICAL)
+
+Before generating or modifying slides, you **MUST**:
+1.  **Search for latest Marp syntax (Context7)**: Always use `mcp_context7_query-docs` to consult official documentation for the most up-to-date Marp syntax, directives, and features.
+2.  **Search for Best Practices (Web)**: Use `web_search` to research current presentation design trends and best practices (e.g., "effective slide layouts 2024").
+3.  **Verify syntax**: Ensure any directives (e.g., `<!-- _class: invert -->`) or image attributes (e.g., `![bg right:40%]`) are currently supported.
+
+## 2. "@slide" Trigger & Workflow
+
+When the user inputs `@slide` followed by ideas/points:
+
+1.  **Parse & Plan**:
+    *   Extract the core topic and key points.
+    *   Structure the presentation:
+        *   **Title Slide**: Title, Subtitle, Presenter Name.
+        *   **Agenda/Overview**: Brief list of what will be covered.
+        *   **Content Slides**: Break down points (1 idea per slide).
+        *   **Conclusion**: Summary and Q&A.
+2.  **Generate Content**:
+    *   Write the Markdown in `src/slide.md`.
+    *   Apply **Presentation Best Practices** (see below).
+    *   Use appropriate Marp syntax for layout and styling.
+
+### Example Usage
+
+**User Input:**
+```text
+@slide
+Topic: Project Alpha Launch
+Points:
+- Successfully deployed to prod
+- User adoption up 20%
+- Next steps: Mobile app
+```
+
+**AI Action:**
+Generates `src/slide.md` with a title slide, and individual slides for deployment, adoption, and next steps, using professional layouts.
+
+## 3. Presentation Best Practices
+
+Apply these principles to all generated slides:
+
+*   **One Idea Per Slide**: Don't cram multiple complex topics onto one slide.
+*   **6x6 Rule**: Max 6 bullet points per slide, max 6 words per bullet.
+*   **Visuals Over Text**: Use images/diagrams to explain concepts (use placeholders if no assets exist: `![placeholder](https://via.placeholder.com/800x600)`).
+*   **Consistent Formatting**:
+    *   Use the same theme throughout.
+    *   Keep headers hierarchical (`#` for slide titles, `##` for content headers).
+*   **Readable Typography**:
+    *   Marp handles sizing, but avoid deep nesting of lists.
+    *   Use **bold** for emphasis, not CAPS.
+
+## 4. Marp Syntax Reference
+
+### Front-matter (Required)
+Always start `src/slide.md` with:
+```yaml
+---
+marp: true
+theme: default # or gaia, uncover
+paginate: true
+header: 'Project Name'
+footer: '© 2024 Company'
+---
+```
+
+### Slide Separation
+Use `---` surrounded by blank lines to separate slides.
+
+```markdown
+# Slide 1
+
+---
+
+# Slide 2
+```
+
+### Directives
+*   **Global** (in front-matter): `theme`, `size` (16:9 or 4:3)
+*   **Local** (per slide, use underscore):
+    ```markdown
+    <!-- _class: invert -->
+    <!-- _paginate: false -->
+    <!-- _header: '' -->
+    ```
+*   **Scoped** (applies to current slide and following):
+    ```markdown
+    <!-- class: lead -->
+    ```
+
+### Images
+*   **Standard**: `![width:500px](image.png)`
+*   **Background**: `![bg](image.jpg)`
+*   **Split Background**: `![bg right:40%](image.jpg)` (Places image on right 40%, text on left)
+*   **Filters**: `![bg brightness:0.8](image.jpg)`
+
+### Code Blocks
+Always specify the language:
+```markdown
+```javascript
+console.log('Hello');
+```
+```
+
+### Speaker Notes
+Use HTML comments:
+```markdown
+<!-- 
+Speaker note:
+Remember to pause here and ask for questions.
+-->
+```
+
+## 5. Asset Usage
+*   Store images in `src/assets/images/`.
+*   Reference them relative to the markdown file: `![icon](./assets/icons/icon.png)`.
+*   Prefer local assets over remote URLs for production slides.

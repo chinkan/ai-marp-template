@@ -1,0 +1,19 @@
+{
+  "name": "my-marp-template",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "marp --watch --server --allow-local-files src/",
+    "build": "marp src/slide.md --allow-local-files -o dist/slide.html",
+    "serve": "marp --server dist/",
+    "pptx": "marp src/slide.md --allow-local-files --pptx -o output/slide.pptx",
+    "pdf": "marp src/slide.md --allow-local-files --pdf -o output/slide.pdf"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.27.0",
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.2.3"
+  }
+}
