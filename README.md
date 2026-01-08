@@ -53,23 +53,23 @@ All themes are located in `src/themes/` and can be applied globally in the front
 
 ### 1. Corporate (`theme: corporate`)
 *Professional, blue-accented theme perfect for business.*
-![Corporate Theme Preview](https://via.placeholder.com/600x337/f8f9fa/0056b3?text=Corporate+Theme)
+![Corporate Theme Preview](imgs/corporate.png)
 
 ### 2. Developer (`theme: developer`)
 *Dark mode with syntax highlighting support.*
-![Developer Theme Preview](https://via.placeholder.com/600x337/1e1e1e/569cd6?text=Developer+Theme)
+![Developer Theme Preview](imgs/developer.png)
 
 ### 3. Gradient (`theme: gradient`)
 *Modern, vibrant gradients for high-impact talks.*
-![Gradient Theme Preview](https://via.placeholder.com/600x337/fad0c4/ff6b6b?text=Gradient+Theme)
+![Gradient Theme Preview](imgs/gradient.png)
 
 ### 4. Minimal (`theme: minimal`)
 *Clean, whitespace-heavy design for clarity.*
-![Minimal Theme Preview](https://via.placeholder.com/600x337/ffffff/333333?text=Minimal+Theme)
+![Minimal Theme Preview](imgs/minimal.png)
 
 ### 5. Midnight (`theme: midnight`)
 *Elegant deep navy and gold for evening events.*
-![Midnight Theme Preview](https://via.placeholder.com/600x337/0f172a/fbbf24?text=Midnight+Theme)
+![Midnight Theme Preview](imgs/midnight.png)
 
 ## 📁 Directory Structure
 
