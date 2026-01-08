@@ -1,6 +1,6 @@
 # 📊 AI-Powered Marp Presentation Template
 
-![GitHub license](https://img.shields.io/github/license/yourusername/my-marp-template)
+![GitHub license](https://img.shields.io/github/license/chinkan/ai-marp-template)
 ![Marp](https://img.shields.io/badge/Marp-Ready-0288D1)
 ![Cursor](https://img.shields.io/badge/Cursor-AI_Powered-black)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
@@ -21,7 +21,7 @@
 ## 🏁 Quick Start
 
 1. **Use this Template**:
-   Click the **[Use this template](https://github.com/new?template_name=my-marp-template&template_owner=yourusername)** button at the top of the repo to create your own repository.
+   Click the **[Use this template](https://github.com/new?template_name=ai-marp-template&template_owner=chinkan)** button at the top of the repo to create your own repository.
 
 2. **Clone & Install**:
    ```bash
@@ -95,7 +95,7 @@ All themes are located in `src/themes/` and can be applied globally in the front
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please look at the [issues](https://github.com/yourusername/my-marp-template/issues) to find something to work on.
+Contributions are welcome! Please look at the [issues](https://github.com/chinkan/ai-marp-template/issues) to find something to work on.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
