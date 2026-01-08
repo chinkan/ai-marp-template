@@ -44,8 +44,17 @@ This template includes a `.cursor/rules` file that supercharges your workflow. O
 |---------|--------|---------|
 | `@slide` | Create a **NEW** presentation from scratch | `@slide Topic: Quarterly Review. Points: Q1 growth, Q2 goals...` |
 | `@slide-update` | Modify the **CURRENT** slide deck | `@slide-update Add a slide about "Risks" after the timeline` |
-| `@theme` | List and preview available themes | `@theme Show me the midnight theme` |
-| `@slide-export` | Export slides to PDF or PPTX | `@slide-export as PDF` |
+
+## 🛠️ Commands
+
+| Command | Description |
+|---------|-------------|
+| `pnpm install` | Install dependencies |
+| `pnpm dev` | Start dev server with hot-reload at `http://localhost:8080` |
+| `pnpm build` | Build all slides to HTML in `dist/` |
+| `pnpm build:slides` | Build only user slides (from `src/slides/`) |
+| `pnpm pdf` | Export slides to PDF in `output/` |
+| `pnpm pptx` | Export slides to PowerPoint in `output/` |
 
 ## 🎨 Themes
 
@@ -84,14 +93,6 @@ All themes are located in `src/themes/` and can be applied globally in the front
 ├── dist/               # 📦 Build output
 └── package.json        # ⚙️ Scripts and dependencies
 ```
-
-## 🛠️ CLI Reference
-
-- `pnpm dev`: Start local preview server (watch mode)
-- `pnpm build`: Build all slides to HTML in `dist/`
-- `pnpm build:slides`: Build only user slides
-- `pnpm pdf`: Export all slides to PDF
-- `pnpm pptx`: Export all slides to PowerPoint
 
 ## 🤝 Contributing
 
