@@ -68,7 +68,62 @@ When user inputs `@slide-update` followed by ideas/changes:
     *   Preserve existing structure unless explicitly asked to change.
 3.  **Save Changes**: Update the existing file in place.
 
-## 3. Presentation Best Practices
+## 3. Image Generation & Management
+
+### Image Storage
+All presentation images **MUST** be stored in `src/assets/images/` with kebab-case filenames matching the slide topic.
+
+### When Creating Slides with Background Images
+
+For each slide that needs a background image:
+
+1.  **Create placeholder image file**: Generate an empty/placeholder PNG in `src/assets/images/<image-name>.png`
+2.  **Reference local path**: Use `![bg right:40%](../assets/images/<image-name>.png)` instead of external URLs
+3.  **Generate AI prompt**: After creating the slide file, output a **Image Generation Prompts** section with suggested prompts for each placeholder
+
+### Placeholder Image Creation
+
+When a slide needs a background image, create an empty placeholder:
+
+```bash
+# Create a 1x1 transparent PNG as placeholder
+echo "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" | base64 -d > src/assets/images/<image-name>.png
+```
+
+### AI Image Generation Prompts
+
+After creating slides, **ALWAYS** output a section titled **"Image Generation Prompts"** with:
+
+| Image File | Slide | AI Prompt |
+|------------|-------|-----------|
+| `<filename>.png` | Slide N: Title | Full prompt for AI image generation |
+
+#### Prompt Template Structure
+
+```
+[Subject/Scene description], [color scheme matching theme], [style: modern corporate/tech/gradient/minimal/elegant], professional presentation visual, clean composition, 16:9 aspect ratio, 4K quality
+```
+
+#### Color Schemes by Theme
+
+| Theme | Primary Colors | Accent |
+|-------|---------------|--------|
+| `corporate` | Blue `#2563eb`, White | Gold `#b8860b` |
+| `developer` | Dark `#1e1e1e`, Green `#4ec9b0` | Purple `#c586c0` |
+| `gradient` | Purple `#8b5cf6`, Pink `#ec4899` | Blue `#3b82f6` |
+| `minimal` | White, Gray `#6b7280` | Black |
+| `midnight` | Dark Blue `#1e3a5f`, Gold `#ffd700` | White |
+
+#### Example Prompts by Content Type
+
+*   **Evaluation/Comparison**: "Balanced scale icon with checkmark and warning symbols, [theme colors], modern flat design, business presentation style"
+*   **Use Cases/Applications**: "Abstract AI chatbot illustration, multiple chat bubbles with icons, [theme colors], isometric design"
+*   **Implementation/Roadmap**: "Roadmap visualization with milestone checkpoints, [theme colors], strategic planning infographic"
+*   **Technology/Platform**: "Futuristic AI dashboard with neural network nodes, [theme colors], enterprise software concept"
+*   **Summary/Conclusion**: "Abstract key takeaways with interconnected circles, [theme colors], synthesis concept"
+*   **Automotive/Dealership**: "Luxury car showroom with digital assistant, [theme colors], premium automotive atmosphere"
+
+## 4. Presentation Best Practices
 
 Apply these principles to all generated slides:
 
@@ -76,7 +131,7 @@ Apply these principles to all generated slides:
 *   **6x6 Rule**: Max 6 bullet points per slide, max 6 words per bullet.
 *   **Visuals Over Text**:
     *   Use images/diagrams to explain concepts.
-    *   **Placeholders**: If no specific image exists, use `![bg right:40%](https://placehold.co/600x400/png?text=Topic)` or similar.
+    *   **Local Images**: Always use `![bg right:40%](../assets/images/<topic>.png)` with local placeholder files.
 *   **Consistent Formatting**:
     *   Use the same theme throughout.
     *   Keep headers hierarchical (`#` for slide titles, `##` for content headers).
@@ -84,7 +139,7 @@ Apply these principles to all generated slides:
     *   Marp handles sizing, but avoid deep nesting of lists.
     *   Use **bold** for emphasis, not CAPS.
 
-## 4. Marp Syntax Reference
+## 5. Marp Syntax Reference
 
 ### Front-matter (Required)
 Always start slides with:
@@ -121,17 +176,51 @@ Remember to pause here and ask for questions.
 -->
 ```
 
-## 5. Directory Structure
+## 6. Directory Structure
 
 ```
 src/
-├── slides/           # User presentations (created via @slide)
-├── demo/             # Theme demos
+├── slides/              # User presentations (created via @slide)
+│   └── <topic>.md       # Slide files
+├── demo/                # Theme demos
 │   ├── theme-corporate.md
 │   ├── theme-developer.md
 │   ├── theme-gradient.md
 │   ├── theme-minimal.md
 │   └── theme-midnight.md
-├── themes/           # Custom CSS themes
-└── assets/           # Media files
+├── themes/              # Custom CSS themes
+└── assets/
+    └── images/          # Presentation images (REQUIRED location)
+        ├── <topic>-<section>.png  # Named by slide topic
+        └── sample.png   # Example placeholder
 ```
+
+## 7. Complete Workflow Example
+
+### Input
+```text
+@slide
+Topic: Q1 Sales Review
+Points:
+- Revenue up 15%
+- New customer acquisition
+- Regional performance
+```
+
+### AI Actions
+1.  Create `src/slides/q1-sales-review.md` with slides
+2.  Create placeholder images in `src/assets/images/`:
+    - `q1-sales-review-intro.png`
+    - `q1-sales-review-revenue.png`
+    - `q1-sales-review-customers.png`
+    - `q1-sales-review-regional.png`
+    - `q1-sales-review-summary.png`
+3.  Output **Image Generation Prompts** table:
+
+| Image File | Slide | AI Prompt |
+|------------|-------|-----------|
+| `q1-sales-review-intro.png` | 1: Title | "Business team celebrating success, blue corporate gradient, modern office setting, professional atmosphere, 16:9, 4K" |
+| `q1-sales-review-revenue.png` | 3: Revenue | "Rising bar chart with golden highlights, blue corporate theme, financial growth visualization, clean infographic, 16:9" |
+| `q1-sales-review-customers.png` | 5: Customers | "Network of connected people icons, customer acquisition concept, blue and green gradient, modern flat design, 16:9" |
+| `q1-sales-review-regional.png` | 7: Regional | "World map with highlighted regions, data visualization overlay, blue corporate colors, geographic analysis, 16:9" |
+| `q1-sales-review-summary.png` | 9: Summary | "Key metrics dashboard with checkmarks, blue corporate theme, executive summary visual, clean composition, 16:9" |
